@@ -7,7 +7,7 @@ const getPerson = async (req, res) => {
     if (!data) {
       return res.status(404).json({ status: "Failed", message: "Not found" });
     }
-    return res.status(201).json({ status: "Success", message: data });
+    return res.status(200).json({ status: "Success", message: data });
   } catch (error) {
     const err = handleErrors(error);
     res.status(500).json({ status: "Failed", message: err });
@@ -17,7 +17,7 @@ const getAllPersons = async (req, res) => {
   try {
     const data = await Person.find();
     if (data.length) {
-      res.status(201).json({ status: "Success", message: data });
+      res.status(200).json({ status: "Success", message: data });
     } else {
       res.status(200).json({ status: "Success", message: "No name yet" });
     }
