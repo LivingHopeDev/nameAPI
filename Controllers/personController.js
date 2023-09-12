@@ -3,9 +3,12 @@ const getPerson = async (req, res) => {
   const { user_id } = req.params;
   try {
     const data = await Person.findOne({ _id: user_id });
-    res.status(201).json({ status: "Success", message: data });
+    if (!data) {
+      return res.status(404).json({ status: "Failed", message: "Not found" });
+    }
+    return res.status(201).json({ status: "Success", message: data });
   } catch (error) {
-    res.status(201).json({ status: "Failed", message: error });
+    res.status(500).json({ status: "Failed", message: error });
   }
 };
 const getAllPersons = async (req, res) => {
@@ -17,7 +20,7 @@ const getAllPersons = async (req, res) => {
       res.status(200).json({ status: "Success", message: "No name yet" });
     }
   } catch (error) {
-    res.status(201).json({ status: "Failed", message: error });
+    res.status(500).json({ status: "Failed", message: error });
   }
 };
 const postPerson = async (req, res) => {
@@ -33,7 +36,7 @@ const postPerson = async (req, res) => {
     res.status(201).json({ status: "Success", message: "Data saved" });
   } catch (error) {
     console.log(error);
-    res.status(201).json({ status: "Failed", message: error });
+    res.status(500).json({ status: "Failed", message: error });
   }
 };
 const updatePerson = async (req, res) => {
@@ -54,7 +57,7 @@ const updatePerson = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(201).json({ status: "Failed", message: error });
+    res.status(500).json({ status: "Failed", message: error });
   }
 };
 const deletePerson = async (req, res) => {
@@ -73,7 +76,7 @@ const deletePerson = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(201).json({ status: "Failed", message: error });
+    res.status(500).json({ status: "Failed", message: error });
   }
 };
 module.exports = {

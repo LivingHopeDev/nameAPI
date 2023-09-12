@@ -17,430 +17,141 @@ Developers who are interested in using this API should have node installed on th
 
 ### Clone the repository
 
-Create and activate the virtual environment.
-
 ```
-git clone https://github.com/LivingHopeDev/job-portal.git
+git clone https://github.com/LivingHopeDev/nameAPI
 
 ```
 
-To install all packages in the requirement, run `pip install -r requirements.txt`
+move into the cloned directory
 
-To run the application, run the following commands
+````
+cd nameAPI
+```
+To install all dependencies, run `npm install`
+
+
+### Configuration
+
+Create a `.env` file in the project's root directory and define the following environment variables
+```
+
+PORT=5000
+MONGO_URI=your_database_connection_string
 
 ```
-$env:FLASK_APP = "flaskr"
-$env:FLASK_DEBUG = "True"
-flask run
+Replace `your_database_connection_string` with the actual connection URL of your database.
+
+To run the application, run any of the commands
+
+````
+
+nodemon app
+node app
 
 ```
 
-The application will run by default on `http://127.0.0.1:5000/`.
+The application will run on `http://127.0.0.1:5000/`.
 
 ## API Reference
 
-### Error Handling
-
-All errors have been formatted and would be returned as JSON objects has soon below.
-
-```
-{
-  "error": 405,
-  "message": "method not allowed",
-  "success": false
-}
-
-```
-
-Other error handlers includes:
-404: Not found
-422: Unprocessable
-400: Bad request
 
 ### Endpoints
 
 To test for the endpoints, the developer should have installed Postman or thunder client or any other application with similar capability or use curl.
 
-#### GET /categories
+#### GET
 
-Returns a list of categories with a success value and the total number of categories.
-Sample: `http://127.0.0.1:5000/categories`
+Returns a list of names and their respective id with a success status .
+Sample: `http://127.0.0.1:5000/`
 
 ```
+
 {
- "categories": {
-   "1": "Science",
-   "2": "Art",
-   "3": "Geography",
-   "4": "History",
-   "5": "Entertainment",
-   "6": "Sports"
- },
- "success": true,
- "total_categories": 6
+"status": "Success",
+"message": [
+{
+"_id": "64ffe09dc23fec307969a212",
+"name": "Adetayo Adewobi",
+"__v": 0
+},
+{
+"_id": "64ffed9d2caf77a938b0e6c4",
+"name": "Oluwatosin",
+"__v": 0
+}
+]
 }
 
 ```
 
-#### GET /questions
+#### GET /user_id
 
-Returns a list of categories, with questions which is a list of dictionaries having answers, category, difficulty, id and question as the keys.
+Returns details of the person with the id.
 
-The result are paginated in groups of 10.
-
-sample: `http://127.0.0.1:5000/questions`
+sample: `http://127.0.0.1:5000/64ffe09dc23fec307969a212`
 
 ```
+
 {
-  "categories": {
-    "1": "Science",
-    "2": "Art",
-    "3": "Geography",
-    "4": "History",
-    "5": "Entertainment",
-    "6": "Sports"
-  },
-  "questions": [
-    {
-      "answer": "Apollo 13",
-      "category": "5",
-      "difficulty": 4,
-      "id": 2,
-      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
-    },
-    {
-      "answer": "Tom Cruise",
-      "category": "5",
-      "difficulty": 4,
-      "id": 4,
-      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
-    },
-    {
-      "answer": "Maya Angelou",
-      "category": "4",
-      "difficulty": 2,
-      "id": 5,
-      "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
-    },
-    {
-      "answer": "Edward Scissorhands",
-      "category": "5",
-      "difficulty": 3,
-      "id": 6,
-      "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
-    },
-    {
-      "answer": "Muhammad Ali",
-      "category": "4",
-      "difficulty": 1,
-      "id": 9,
-      "question": "What boxer's original name is Cassius Clay?"
-    },
-    {
-      "answer": "Brazil",
-      "category": "6",
-      "difficulty": 3,
-      "id": 10,
-      "question": "Which is the only team to play in every soccer World Cup tournament?"
-    },
-    {
-      "answer": "Uruguay",
-      "category": "6",
-      "difficulty": 4,
-      "id": 11,
-      "question": "Which country won the first ever soccer World Cup in 1930?"
-    },
-    {
-      "answer": "George Washington Carver",
-      "category": "4",
-      "difficulty": 2,
-      "id": 12,
-      "question": "Who invented Peanut Butter?"
-    },
-    {
-      "answer": "Lake Victoria",
-      "category": "3",
-      "difficulty": 2,
-      "id": 13,
-      "question": "What is the largest lake in Africa?"
-    },
-    {
-      "answer": "The Palace of Versailles",
-      "category": "3",
-      "difficulty": 3,
-      "id": 14,
-      "question": "In which royal palace would you find the Hall of Mirrors?"
-    }
-  ],
-  "success": true,
-  "total_questions": 21
+{
+"status": "Success",
+"message": {
+"\_id": "64ffe09dc23fec307969a212",
+"name": "Adetayo Adewobi",
+"\_\_v": 0
+}
+}
 }
 
 ```
 
-#### DELETE /questions/{question_id}
+#### POST
 
-Deletes the question of a given id if it exist and returns the id of the deleted question, success value and the questions left in the database are paginated in groups of 10 with the total number of the questions in the database.
+This endpoint adds a new name to the database. It returns a success value.
+sample: `http://127.0.0.1:5000/`
 
-sample: `http://127.0.0.1:5000/questions/21`
 
 ```
+
 {
-  "question deleted": 21,
-  "questions": [
-    {
-      "answer": "Apollo 13",
-      "category": "5",
-      "difficulty": 4,
-      "id": 2,
-      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
-    },
-    {
-      "answer": "Tom Cruise",
-      "category": "5",
-      "difficulty": 4,
-      "id": 4,
-      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
-    },
-    {
-      "answer": "Maya Angelou",
-      "category": "4",
-      "difficulty": 2,
-      "id": 5,
-      "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
-    },
-    {
-      "answer": "Edward Scissorhands",
-      "category": "5",
-      "difficulty": 3,
-      "id": 6,
-      "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
-    },
-    {
-      "answer": "Muhammad Ali",
-      "category": "4",
-      "difficulty": 1,
-      "id": 9,
-      "question": "What boxer's original name is Cassius Clay?"
-    },
-    {
-      "answer": "Brazil",
-      "category": "6",
-      "difficulty": 3,
-      "id": 10,
-      "question": "Which is the only team to play in every soccer World Cup tournament?"
-    },
-    {
-      "answer": "Uruguay",
-      "category": "6",
-      "difficulty": 4,
-      "id": 11,
-      "question": "Which country won the first ever soccer World Cup in 1930?"
-    },
-    {
-      "answer": "George Washington Carver",
-      "category": "4",
-      "difficulty": 2,
-      "id": 12,
-      "question": "Who invented Peanut Butter?"
-    },
-    {
-      "answer": "Lake Victoria",
-      "category": "3",
-      "difficulty": 2,
-      "id": 13,
-      "question": "What is the largest lake in Africa?"
-    },
-    {
-      "answer": "The Palace of Versailles",
-      "category": "3",
-      "difficulty": 3,
-      "id": 14,
-      "question": "In which royal palace would you find the Hall of Mirrors?"
-    }
-  ],
-  "success": true,
-  "total_question": 20
+"status": "Success",
+"message": "Data saved"
 }
 
 ```
 
-#### POST /questions
 
-This endpoint adds a new question, answer, category, difficulty to the database. It returns a success value, paginated questions to update the frontend and the id of the newly created question.
-sample: `http://127.0.0.1:5000/questions`
 
-Json body sent
+### PATCH /user_id
+
+This endpoint updates the user name and returns a success value if a correct user id is passed.
+
+sample: `http://127.0.0.1:5000/user_id`
 
 ```
+
 {
-   "question": "test question",
-   "answer": "test answer",
-   "difficulty": 1,
-   "category":3
-
-}
-```
-
-```
-{
- "questions": [
-   {
-     "answer": "Apollo 13",
-     "category": "5",
-     "difficulty": 4,
-     "id": 2,
-     "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
-   },
-   {
-     "answer": "Tom Cruise",
-     "category": "5",
-     "difficulty": 4,
-     "id": 4,
-     "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
-   },
-   {
-     "answer": "Maya Angelou",
-     "category": "4",
-     "difficulty": 2,
-     "id": 5,
-     "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
-   },
-   {
-     "answer": "Edward Scissorhands",
-     "category": "5",
-     "difficulty": 3,
-     "id": 6,
-     "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
-   },
-   {
-     "answer": "Muhammad Ali",
-     "category": "4",
-     "difficulty": 1,
-     "id": 9,
-     "question": "What boxer's original name is Cassius Clay?"
-   },
-   {
-     "answer": "Brazil",
-     "category": "6",
-     "difficulty": 3,
-     "id": 10,
-     "question": "Which is the only team to play in every soccer World Cup tournament?"
-   },
-   {
-     "answer": "Uruguay",
-     "category": "6",
-     "difficulty": 4,
-     "id": 11,
-     "question": "Which country won the first ever soccer World Cup in 1930?"
-   },
-   {
-     "answer": "George Washington Carver",
-     "category": "4",
-     "difficulty": 2,
-     "id": 12,
-     "question": "Who invented Peanut Butter?"
-   },
-   {
-     "answer": "Lake Victoria",
-     "category": "3",
-     "difficulty": 2,
-     "id": 13,
-     "question": "What is the largest lake in Africa?"
-   },
-   {
-     "answer": "The Palace of Versailles",
-     "category": "3",
-     "difficulty": 3,
-     "id": 14,
-     "question": "In which royal palace would you find the Hall of Mirrors?"
-   }
- ],
- "questions_id": 40,
- "success": true
-}
-```
-
-#### POST /questions/search
-
-This endpoint search for quetions that has a particular keyword inserted into the search box, it's case insensitive. It returns a success value, the list of qustions with the searched keyword and the total number of the questions associated with the keyword.
-
-sample: `http://127.0.0.1:5000/questions/search`
-
-Json body sent
-{
-"searchTerm": "autobiography"
+"status": "Success",
+"message": "Details Updated"
 }
 
-```
-{
-  "questions": [
-    {
-      "answer": "Maya Angelou",
-      "category": "4",
-      "difficulty": 2,
-      "id": 5,
-      "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
-    }
-  ],
-  "success": true,
-  "total_questions": 1
+````
+
+### DELETE /user_id
+
+
+```{
+    "status": "Success",
+    "message": "Details deleted"
 }
-```
+````
 
-### GET /categories/{id}/questions
+### Error codes in the API
 
-Returns a list of questions, in the given category, success value and category total_questions. Paginated questions to update the frontend.
+- 404: Not found
+- 500: Internal server error
+- 409: Conflict
 
-sample: `http://127.0.0.1:5000/categories/6/questions`
+### Limitation
 
-```
-{
-  "current_category": "Sports",
-  "questions": [
-    {
-      "answer": "Brazil",
-      "category": "6",
-      "difficulty": 3,
-      "id": 10,
-      "question": "Which is the only team to play in every soccer World Cup tournament?"
-    },
-    {
-      "answer": "Uruguay",
-      "category": "6",
-      "difficulty": 4,
-      "id": 11,
-      "question": "Which country won the first ever soccer World Cup in 1930?"
-    }
-  ],
-  "success": true,
-  "total_questions": 2
-}
-
-```
-
-### POST /quizzes
-
-Accept the selected category as well as the question associated with the category and it returns the next question in the same category.
-
-sample: `http://127.0.0.1:5000/quizzes`
-JSON body sent
-
-```
-{
- "quiz_category": {"type": "click", "id": "1"}, "previous_questions": [2, 3, 4]
-}
-```
-
-```
-{
-  "question": {
-    "answer": "The Liver",
-    "category": "1",
-    "difficulty": 4,
-    "id": 20,
-    "question": "What is the heaviest organ in the human body?"
-  },
-  "success": true
-}
-```
+This API doesn't perform neither authentication nor authorization which means any of the data in the database can be alter by anyone.
