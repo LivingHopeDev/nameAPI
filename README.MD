@@ -124,6 +124,14 @@ This endpoint updates the user's name and returns a success value if a correct u
 
 sample: `http://127.0.0.1:5000/api/user_id`
 
+- body (JSON)
+
+```
+{
+    "name": "John doe"
+}
+```
+
 ```
 
 {
