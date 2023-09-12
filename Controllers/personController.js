@@ -1,4 +1,5 @@
 const Person = require("../model/person");
+const { handleErrors } = require("../Middleware/errorHandler");
 const getPerson = async (req, res) => {
   const { user_id } = req.params;
   try {
@@ -8,7 +9,8 @@ const getPerson = async (req, res) => {
     }
     return res.status(201).json({ status: "Success", message: data });
   } catch (error) {
-    res.status(500).json({ status: "Failed", message: error });
+    const err = handleErrors(error);
+    res.status(500).json({ status: "Failed", message: err });
   }
 };
 const getAllPersons = async (req, res) => {
@@ -20,10 +22,11 @@ const getAllPersons = async (req, res) => {
       res.status(200).json({ status: "Success", message: "No name yet" });
     }
   } catch (error) {
-    res.status(500).json({ status: "Failed", message: error });
+    const err = handleErrors(error);
+    res.status(500).json({ status: "Failed", message: err });
   }
 };
-const postPerson = async (req, res) => {
+const createPerson = async (req, res) => {
   const { name } = req.body;
   try {
     const personExist = await Person.findOne({ name });
@@ -35,8 +38,8 @@ const postPerson = async (req, res) => {
     await Person.create({ name });
     res.status(201).json({ status: "Success", message: "Data saved" });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ status: "Failed", message: error });
+    const err = handleErrors(error);
+    res.status(500).json({ status: "Failed", message: err });
   }
 };
 const updatePerson = async (req, res) => {
@@ -57,7 +60,8 @@ const updatePerson = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(500).json({ status: "Failed", message: error });
+    const err = handleErrors(error);
+    res.status(500).json({ status: "Failed", message: err });
   }
 };
 const deletePerson = async (req, res) => {
@@ -76,13 +80,14 @@ const deletePerson = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(500).json({ status: "Failed", message: error });
+    const err = handleErrors(error);
+    res.status(500).json({ status: "Failed", message: err });
   }
 };
 module.exports = {
   getPerson,
   getAllPersons,
-  postPerson,
+  createPerson,
   updatePerson,
   deletePerson,
 };

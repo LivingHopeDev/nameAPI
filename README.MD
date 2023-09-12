@@ -15,6 +15,8 @@ The API functionalities includes:
 
 Developers who are interested in using this API should have node installed on their local machines if not already installed.
 
+- Live url `https://nameapi-eqdw.onrender.com/api`
+
 ### Clone the repository
 
 ```
