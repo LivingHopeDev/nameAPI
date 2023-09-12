@@ -135,6 +135,9 @@ sample: `http://127.0.0.1:5000/api/user_id`
 
 ### DELETE /user_id
 
+This endpoint removes a user with the id passed from the database and returns a success value.
+sample: http://127.0.0.1:5000/api/user_id
+
 ```
 {
     "status": "Success",
