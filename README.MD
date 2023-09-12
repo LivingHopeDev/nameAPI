@@ -109,6 +109,14 @@ sample: `http://127.0.0.1:5000/api/64ffe09dc23fec307969a212`
 This endpoint adds a new name to the database. It returns a success value.
 sample: `http://127.0.0.1:5000/api`
 
+- body (JSON)
+
+```
+{
+    "name": "John"
+}
+```
+
 ```
 
 {
@@ -122,7 +130,7 @@ sample: `http://127.0.0.1:5000/api`
 
 This endpoint updates the user's name and returns a success value if a correct user id is passed.
 
-sample: `http://127.0.0.1:5000/api/user_id`
+sample: `http://127.0.0.1:5000/api/6500220d246f6d3954d51ffa`
 
 - body (JSON)
 
