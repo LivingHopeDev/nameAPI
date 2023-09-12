@@ -61,7 +61,7 @@ To test for the endpoints, the developer should have installed Postman or thunde
 #### GET
 
 Returns a list of names and their respective id with a success status .
-Sample: `http://127.0.0.1:5000/`
+Sample: `http://127.0.0.1:5000/api/`
 
 ```
 
@@ -87,7 +87,7 @@ Sample: `http://127.0.0.1:5000/`
 
 Returns details of the person with the id.
 
-sample: `http://127.0.0.1:5000/64ffe09dc23fec307969a212`
+sample: `http://127.0.0.1:5000/api/64ffe09dc23fec307969a212`
 
 ```
 
@@ -107,7 +107,7 @@ sample: `http://127.0.0.1:5000/64ffe09dc23fec307969a212`
 #### POST
 
 This endpoint adds a new name to the database. It returns a success value.
-sample: `http://127.0.0.1:5000/`
+sample: `http://127.0.0.1:5000/api`
 
 ```
 
@@ -122,7 +122,7 @@ sample: `http://127.0.0.1:5000/`
 
 This endpoint updates the user's name and returns a success value if a correct user id is passed.
 
-sample: `http://127.0.0.1:5000/user_id`
+sample: `http://127.0.0.1:5000/api/user_id`
 
 ```
 
