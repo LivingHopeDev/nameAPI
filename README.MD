@@ -22,38 +22,35 @@ git clone https://github.com/LivingHopeDev/nameAPI
 
 ```
 
-move into the cloned directory
+- move into the cloned directory
 
-````
+```
 cd nameAPI
 ```
-To install all dependencies, run `npm install`
 
+To install all dependencies, run `npm install`
 
 ### Configuration
 
 Create a `.env` file in the project's root directory and define the following environment variables
-```
 
+```
 PORT=5000
 MONGO_URI=your_database_connection_string
-
 ```
+
 Replace `your_database_connection_string` with the actual connection URL of your database.
 
 To run the application, run any of the commands
 
-````
-
+```
 nodemon app
 node app
-
 ```
 
 The application will run on `http://127.0.0.1:5000/`.
 
 ## API Reference
-
 
 ### Endpoints
 
@@ -110,7 +107,6 @@ sample: `http://127.0.0.1:5000/64ffe09dc23fec307969a212`
 This endpoint adds a new name to the database. It returns a success value.
 sample: `http://127.0.0.1:5000/`
 
-
 ```
 
 {
@@ -119,8 +115,6 @@ sample: `http://127.0.0.1:5000/`
 }
 
 ```
-
-
 
 ### PATCH /user_id
 
@@ -135,16 +129,15 @@ sample: `http://127.0.0.1:5000/user_id`
 "message": "Details Updated"
 }
 
-````
+```
 
 ### DELETE /user_id
-
 
 ```{
     "status": "Success",
     "message": "Details deleted"
 }
-````
+```
 
 ### Error codes in the API
 
