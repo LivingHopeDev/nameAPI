@@ -93,9 +93,9 @@ sample: `http://127.0.0.1:5000/64ffe09dc23fec307969a212`
 {
 "status": "Success",
 "message": {
-"\_id": "64ffe09dc23fec307969a212",
+"_id": "64ffe09dc23fec307969a212",
 "name": "Adetayo Adewobi",
-"\_\_v": 0
+"__v": 0
 }
 }
 }
@@ -118,7 +118,7 @@ sample: `http://127.0.0.1:5000/`
 
 ### PATCH /user_id
 
-This endpoint updates the user name and returns a success value if a correct user id is passed.
+This endpoint updates the user's name and returns a success value if a correct user id is passed.
 
 sample: `http://127.0.0.1:5000/user_id`
 
@@ -133,7 +133,8 @@ sample: `http://127.0.0.1:5000/user_id`
 
 ### DELETE /user_id
 
-```{
+```
+{
     "status": "Success",
     "message": "Details deleted"
 }
@@ -147,4 +148,4 @@ sample: `http://127.0.0.1:5000/user_id`
 
 ### Limitation
 
-This API doesn't perform neither authentication nor authorization which means any of the data in the database can be alter by anyone.
+` This API doesn't perform neither authentication nor authorization which means any of the data in the database can be alter by anyone.
