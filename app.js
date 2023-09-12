@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
+const mongoSanitize = require("express-mongo-sanitize");
 require("dotenv").config();
 const bodyParser = require("body-parser");
 const Route = require("./Routes/route");
@@ -11,7 +12,7 @@ mongoose
   .catch((err) => console.log(err));
 
 const app = express();
-
+app.use(mongoSanitize());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
